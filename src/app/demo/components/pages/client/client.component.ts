@@ -3,6 +3,7 @@ import { Client } from './models/client.model'
 import { MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { ClientService } from './services/client.service';
+import { CepService } from './services/cep.service';
 
 @Component({
     templateUrl: './client.component.html',
@@ -30,9 +31,17 @@ export class ClientComponent implements OnInit {
 
     rowsPerPageOptions = [5, 10, 20];
 
-    constructor(private clientService: ClientService, private messageService: MessageService) { }
+    ufs: any[] = [];
+
+    municipios: any[] = [];
+
+    constructor(private clientService: ClientService, private messageService: MessageService, private cepService: CepService) { }
 
     ngOnInit() {
+        this.cepService.buscarEstados().subscribe((ufs:any[])=>{
+            this.ufs = ufs;
+        })
+
         this.clientService.getClients().subscribe((clients: any)=>{
             this.clients = clients
             console.log(clients)
@@ -40,17 +49,40 @@ export class ClientComponent implements OnInit {
 
         this.cols = [
             { field: 'client', header: 'Client' },
-            { field: 'price', header: 'Price' },
-            { field: 'category', header: 'Category' },
-            { field: 'rating', header: 'Reviews' },
-            { field: 'inventoryStatus', header: 'Status' }
+            { field: 'endereco', header: 'Endereço' },
+            { field: 'telefone', header: 'Telefone' },
+            { field: 'cpf', header: 'CPF' },
+            { field: 'sexo', headed: 'Sexo' }
         ];
 
-        this.statuses = [
-            { label: 'INSTOCK', value: 'instock' },
-            { label: 'LOWSTOCK', value: 'lowstock' },
-            { label: 'OUTOFSTOCK', value: 'outofstock' }
-        ];
+    }
+
+    getCep(cep:any){
+        this.cepService.buscar(cep).subscribe(
+            (cep:any) =>{
+                this.client.logradouro = cep.logradouro
+                const estadoId = this.ufs.find((estado: any) => estado.sigla == cep.uf);
+                this.client.estado = estadoId;
+                this.getMunicipios(estadoId.id)
+                setTimeout(()=>{
+                    const municipioId = this.municipios.find((cidade: any) => cidade.nome == cep.localidade);
+                    this.client.municipio =  municipioId
+                },500)
+            }
+        )
+    }
+
+    getMunicipios(code:string){
+        
+        this.cepService.buscarMunicipios(code).subscribe(
+            (municipios:any) =>{
+                this.municipios = municipios
+            }
+        )
+    }
+
+    testeUF(){
+        console.log("municipio",this.client.municipio)
     }
 
     openNew() {
@@ -101,10 +133,9 @@ export class ClientComponent implements OnInit {
     saveClient() {
         this.submitted = true;
 
-        if (this.client.name?.trim()) {
+        if (this.client.nome?.trim()) {
             if (this.client.id) {
                 // @ts-ignore
-                this.client.inventoryStatus = this.client.inventoryStatus.value ? this.client.inventoryStatus.value : this.client.inventoryStatus;
                 // this.clients[this.findIndexById(this.client.id)] = this.client;
                 this.clientService.updateClient(this.client.key, this.client);
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Client Updated', life: 3000 });

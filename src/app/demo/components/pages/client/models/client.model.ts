@@ -1,17 +1,14 @@
-interface InventoryStatus {
-    label: string;
-    value: string;
-}
 export interface Client {
     key?: string;
     id?: string;
-    code?: string;
-    name?: string;
-    description?: string;
-    price?: number;
-    quantity?: number;
-    inventoryStatus?: InventoryStatus;
-    category?: string;
-    image?: string;
-    rating?: number;
-}
+    logradouro?: string;
+    uf?: string;
+    nome?: string;
+    cep?: any;
+    municipio?:any;
+    estado?: any;
+    telefone?: string;
+    cpf?: string;
+    sexo?: 'Masculino' | 'Feminino' | 'Outro';
+  }
+  
