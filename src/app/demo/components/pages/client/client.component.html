@@ -80,11 +80,14 @@
             <ng-template pTemplate="content">
                 <img [src]="'assets/demo/images/client/' + client.image" [alt]="client.image" width="150" class="mt-0 mx-auto mb-5 block shadow-2" *ngIf="client.image">
 
-                
+                <div class="field">
+                    <label for="nome">Nome</label>
+                    <input type="text" pInputText id="nome" [(ngModel)]="client.nome" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.name}"/>
+                </div>
+
                 <div class="field">
                     <label for="cep">Cep</label>
-                    <input type="text" pInputText id="cep" [(ngModel)]="client.cep" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.name}" (blur)="getCep(client.cep)"/>
-                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !client.cep">cep is required.</small>
+                    <input type="text" pInputText id="cep" [(ngModel)]="client.cep" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.cep}" (blur)="getCep(client.cep)"/>
                 </div>
 
 
@@ -102,41 +105,19 @@
                 
                 <div class="field">
                     <label for="logradouro">Logradouro</label>
-                    <input type="text" pInputText id="logradouro" [(ngModel)]="client.logradouro" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.name}"/>
+                    <input type="text" pInputText id="logradouro" [(ngModel)]="client.logradouro" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.logradouro}"/>
                 </div>
 
                 <div class="field">
-                    <label class="mb-3">Category</label>
-                    <div class="formgrid grid">
-                        <div class="field-radiobutton col-6">
-                            <p-radioButton id="category1" name="category" value="Accessories" [(ngModel)]="client.category"></p-radioButton>
-                            <label for="category1">Accessories</label>
-                        </div>
-                        <div class="field-radiobutton col-6">
-                            <p-radioButton id="category2" name="category" value="Clothing" [(ngModel)]="client.category"></p-radioButton>
-                            <label for="category2">Clothing</label>
-                        </div>
-                        <div class="field-radiobutton col-6">
-                            <p-radioButton id="category3" name="category" value="Electronics" [(ngModel)]="client.category"></p-radioButton>
-                            <label for="category3">Electronics</label>
-                        </div>
-                        <div class="field-radiobutton col-6">
-                            <p-radioButton id="category4" name="category" value="Fitness" [(ngModel)]="client.category"></p-radioButton>
-                            <label for="category4">Fitness</label>
-                        </div>
-                    </div>
+                    <label for="bairro">Bairro</label>
+                    <input type="text" pInputText id="bairro" [(ngModel)]="client.bairro" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.bairro}"/>
                 </div>
 
-                <div class="formgrid grid">
-                    <div class="field col">
-                        <label for="price">Price</label>
-                        <p-inputNumber id="price" [(ngModel)]="client.price" mode="currency" currency="USD" locale="en-US"></p-inputNumber>
-                    </div>
-                    <div class="field col">
-                        <label for="quantity">Quantity</label>
-                        <p-inputNumber id="quantity" [(ngModel)]="client.quantity"></p-inputNumber>
-                    </div>
+                <div class="field">
+                    <label for="telefone">Telefone</label>
+                    <input type="text" pInputText id="telefone" [(ngModel)]="client.telefone" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.telefone}"/>
                 </div>
+
             </ng-template>
 
             <ng-template pTemplate="footer">
