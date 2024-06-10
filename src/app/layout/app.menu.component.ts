@@ -94,6 +94,11 @@ export class AppMenuComponent implements OnInit {
                         label: 'Client',
                         icon: 'pi pi-fw pi-pencil',
                         routerLink: ['pages/client']
+                    },
+                    {
+                        label: 'Product',
+                        icon: 'pi pi-fw pi-pencil',
+                        routerLink: ['pages/product']
                     }
                     // {
                     //     label: 'Timeline',
