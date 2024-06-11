@@ -58,6 +58,7 @@ export class OrderComponent implements OnInit {
         });
 
         this.cols = [
+            { field: 'code', header: 'Code' },
             { field: 'cliente', header: 'Cliente' },
             { field: 'produto', header: 'Produto' },
             { field: 'total', header: 'Total' },

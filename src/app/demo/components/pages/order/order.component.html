@@ -80,8 +80,8 @@
 
                 <div class="field">
                     <label for="clients">Clientes</label>
-                    <p-dropdown [options]="clients" [(ngModel)]="client.name" optionLabel="nome" placeholder="Selecione um cliente"></p-dropdown>
-                </div>
+                    <p-dropdown (onFocus)='client.getClient()' [options]="clients" [(ngModel)]="client.name" optionLabel="nome" placeholder="Selecione um cliente"></p-dropdown>
+                  </div>
                 
 
                 <div class="field">
