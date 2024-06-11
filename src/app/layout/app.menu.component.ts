@@ -85,11 +85,11 @@ export class AppMenuComponent implements OnInit {
                     //         }
                     //     ]
                     // },
-                    {
-                        label: 'Crud',
-                        icon: 'pi pi-fw pi-pencil',
-                        routerLink: ['/pages/crud']
-                    },
+                    // {
+                    //     label: 'Crud',
+                    //     icon: 'pi pi-fw pi-pencil',
+                    //     routerLink: ['/pages/crud']
+                    // },
                     {
                         label: 'Client',
                         icon: 'pi pi-fw pi-pencil',
@@ -99,7 +99,13 @@ export class AppMenuComponent implements OnInit {
                         label: 'Product',
                         icon: 'pi pi-fw pi-pencil',
                         routerLink: ['pages/product']
+                    },
+                    {
+                        label: 'Order',
+                        icon: 'pi pi-fw pi-pencil',
+                        routerLink: ['pages/order']
                     }
+                    
                     // {
                     //     label: 'Timeline',
                     //     icon: 'pi pi-fw pi-calendar',
