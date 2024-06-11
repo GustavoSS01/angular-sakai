@@ -19,7 +19,7 @@
             <p-table #dt [value]="products" [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['name','country.name','representative.name','status']" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedProducts" selectionMode="multiple" [rowHover]="true" dataKey="id">
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                        <h5 class="m-0">Manage Products</h5>
+                        <h5 class="m-0">Gerenciar Produtos</h5>
                         <span class="block mt-2 md:mt-0 p-input-icon-left">
                             <i class="pi pi-search"></i>
                             <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
@@ -31,10 +31,10 @@
                         <th style="width: 3rem">
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                        <th pSortableColumn="code">Code <p-sortIcon field="code"></p-sortIcon></th>
-                        <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
-                        <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
-                        <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon></th>
+                        <th pSortableColumn="code">Código <p-sortIcon field="code"></p-sortIcon></th>
+                        <th pSortableColumn="name">Nome <p-sortIcon field="name"></p-sortIcon></th>
+                        <th pSortableColumn="price">Preço <p-sortIcon field="price"></p-sortIcon></th>
+                        <th pSortableColumn="category">Categoria <p-sortIcon field="category"></p-sortIcon></th>
                         <th></th>
                     </tr>
                 </ng-template>
@@ -43,29 +43,20 @@
                         <td>
                             <p-tableCheckbox [value]="product"></p-tableCheckbox>
                         </td>
-                        <td style="width:14%; min-width:10rem;"><span class="p-column-title">Code</span>
+                        <td style="width:14%; min-width:10rem;"><span class="p-column-title">Código</span>
                             {{product.code || product.id}}
                         </td>
                         <td style="width:14%; min-width:10rem;">
-                            <span class="p-column-title">Name</span>
+                            <span class="p-column-title">Nome</span>
                             {{product.name}}
                         </td>
-                        <td style="width:14%; min-width:10rem;"><span class="p-column-title">Image</span>
-                            <img [src]="'assets/demo/images/product/' + product.image" [alt]="product.name" width="100" class="shadow-4" />
-                        </td>
                         <td style="width:14%; min-width:8rem;">
-                            <span class="p-column-title">Price</span>
+                            <span class="p-column-title">Preço</span>
                             {{product.price | currency:'USD'}}
                         </td>
                         <td style="width:14%; min-width:10rem;">
-                            <span class="p-column-title">Category</span>
+                            <span class="p-column-title">Categoria</span>
                             {{product.category}}
-                        </td>
-                        <td style="width:14%; min-width: 10rem;"><span class="p-column-title">Reviews</span>
-                            <p-rating [ngModel]="product.rating" [readonly]="true" [cancel]="false"></p-rating>
-                        </td>
-                        <td style="width:14%; min-width: 10rem;"><span class="p-column-title">Status</span>
-                            <span [class]="'product-badge status-' + (product.inventoryStatus ? product.inventoryStatus.toLowerCase() : '')">{{product.inventoryStatus}}</span>
                         </td>
                         <td>
                             <div class="flex">
@@ -84,14 +75,14 @@
                 <div class="field">
                     <label for="name">Name</label>
                     <input type="text" pInputText id="name" [(ngModel)]="product.name" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.name}" />
-                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.name">Name is required.</small>
+                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.name">Nome é necessário</small>
                 </div>
                 <div class="field">
                     <label for="price">Price</label>
                     <input type="number" id="price" pInputTextarea [(ngModel)]="product.price" required rows="3" cols="20" min="0" step="0.01" />
                 </div>
                 <div class="field">
-                    <label for="category">Category</label>
+                    <label for="category">Categoria</label>
                     <p-dropdown [(ngModel)]="product.category" inputId="category" [options]="categories" placeholder="Select a category" scrollHeight="200px" appendTo="body">
                         <ng-template pTemplate="selectedItem">
                             <span *ngIf="product && product.category">{{ product.category }}</span>
@@ -112,7 +103,7 @@
         <p-dialog [(visible)]="deleteProductDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
             <div class="flex align-items-center justify-content-center">
                 <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                <span *ngIf="product">Are you sure you want to delete <b>{{product.name}}</b>?</span>
+                <span *ngIf="product">Tem certeza que quer deletar <b>{{product.name}}</b>?</span>
             </div>
             <ng-template pTemplate="footer">
                 <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteProductDialog = false"></button>
@@ -123,7 +114,7 @@
         <p-dialog [(visible)]="deleteProductsDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
             <div class="flex align-items-center justify-content-center">
                 <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                <span>Are you sure you want to delete selected products?</span>
+                <span>Tem certeza que quer deletar os produtos selecionados?</span>
             </div>
             <ng-template pTemplate="footer">
                 <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteProductsDialog = false"></button>
