@@ -18,7 +18,7 @@
             <p-table #dt [value]="clients" [columns]="cols" responsiveLayout="scroll" [rows]="10" [globalFilterFields]="['name','country.name','representative.name','status']" [paginator]="true" [rowsPerPageOptions]="[10,20,30]" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [(selection)]="selectedClients" selectionMode="multiple" [rowHover]="true" dataKey="id">
                 <ng-template pTemplate="caption">
                     <div class="flex flex-column md:flex-row md:justify-content-between md:align-items-center">
-                        <h5 class="m-0">Manage Produtos</h5>
+                        <h5 class="m-0">Clientes</h5>
                         <span class="block mt-2 md:mt-0 p-input-icon-left">
                             <i class="pi pi-search"></i>
                             <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Search..."  class="w-full sm:w-auto"/>
@@ -31,11 +31,12 @@
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
                         <th pSortableColumn="code">Code <p-sortIcon field="code"></p-sortIcon></th>
-                        <th pSortableColumn="name">Name <p-sortIcon field="name"></p-sortIcon></th>
-                        <th pSortableColumn="price">Price <p-sortIcon field="price"></p-sortIcon></th>
-                        <th pSortableColumn="category">Category <p-sortIcon field="category"></p-sortIcon></th>
-                        <th pSortableColumn="rating">Reviews <p-sortIcon field="rating"></p-sortIcon></th>
-                        <th pSortableColumn="inventoryStatus">Status <p-sortIcon field="inventoryStatus"></p-sortIcon></th>
+                        <th pSortableColumn="nome">Nome <p-sortIcon field="nome"></p-sortIcon></th>
+                        <th pSortableColumn="cpf">CPF <p-sortIcon field="cpf"></p-sortIcon></th>
+                        <th pSortableColumn="cep">Cep <p-sortIcon field="cep"></p-sortIcon></th>
+                        <th pSortableColumn="estados">Estado <p-sortIcon field="estados"></p-sortIcon></th>
+                        <th pSortableColumn="municipios">Municipio <p-sortIcon field="municipios"></p-sortIcon></th>
+                        <th pSortableColumn="logradouro">Logradouro <p-sortIcon field="logradouro"></p-sortIcon></th>
                         <th></th>
                     </tr>
                 </ng-template>
@@ -48,22 +49,28 @@
                             {{client.code || client.id}}
                         </td>
                         <td style="width:14%; min-width:10rem;">
-                            <span class="p-column-title">Name</span>
-                            {{client.name}}
-                        </td>
-                        <td style="width:14%; min-width:10rem;"><span class="p-column-title">Image</span>
-                            <img [src]="'assets/demo/images/client/' + client.image" [alt]="client.name" width="100" class="shadow-4" />
-                        </td>
-                        <td style="width:14%; min-width:8rem;">
-                            <span class="p-column-title">Price</span>
-                            {{client.price | currency:'USD'}}
+                            <span class="p-column-title">Nome</span>
+                            {{client.nome}}
                         </td>
                         <td style="width:14%; min-width:10rem;">
-                            <span class="p-column-title">Category</span>
-                            {{client.category}}
+                            <span class="p-column-title">CPF</span>
+                            {{client.cpf}}
                         </td>
-                        <td style="width:14%; min-width: 10rem;"><span class="p-column-title">Reviews</span>
-                            <p-rating [ngModel]="client.rating" [readonly]="true" [cancel]="false"></p-rating>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">Cep</span>
+                            {{client.cep}}
+                        </td>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">Estado</span>
+                            {{client.estado.nome}}
+                        </td>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">Municipio</span>
+                            {{client.municipio.nome}}
+                        </td>
+                        <td style="width:14%; min-width:10rem;">
+                            <span class="p-column-title">Rua</span>
+                            {{client.logradouro}}
                         </td>
                         <td>
                             <div class="flex">
@@ -86,22 +93,24 @@
                 </div>
 
                 <div class="field">
+                    <label for="cpf">CPF</label>
+                    <input type="text" pInputText id="cpf" [(ngModel)]="client.cpf" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.cpf}"/>
+                </div>
+
+                <div class="field">
                     <label for="cep">Cep</label>
                     <input type="text" pInputText id="cep" [(ngModel)]="client.cep" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.cep}" (blur)="getCep(client.cep)"/>
                 </div>
-
 
                 <div class="field">
                     <label for="ufs">Estados</label>
                     <p-dropdown (onChange)="getMunicipios(client.estado.id)" [options]="ufs" [(ngModel)]="client.estado" optionLabel="nome" placeholder="Selecione um estado" />
                 </div>
                 
-
                 <div class="field">
                     <label for="municipios">Municipios</label>
                     <p-dropdown (onChange)="testeUF()" [options]="municipios" [(ngModel)]="client.municipio" optionLabel="nome" placeholder="Selecione um municipio" />
                 </div>
-                
                 
                 <div class="field">
                     <label for="logradouro">Logradouro</label>
@@ -129,7 +138,7 @@
         <p-dialog [(visible)]="deleteClientDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
             <div class="flex align-items-center justify-content-center">
                 <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                <span *ngIf="client">Are you sure you want to delete <b>{{client.name}}</b>?</span>
+                <span *ngIf="client">Are you sure you want to delete <b>{{client.nome}}</b>?</span>
             </div>
             <ng-template pTemplate="footer">
                 <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteClientDialog = false"></button>
