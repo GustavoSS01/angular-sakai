@@ -80,7 +80,7 @@
 
                 <div class="field">
                     <label for="clients">Clientes</label>
-                    <p-dropdown (onFocus)='client.getClient()' [options]="clients" [(ngModel)]="client.name" optionLabel="nome" placeholder="Selecione um cliente"></p-dropdown>
+                    <p-dropdown (onFocus)='getClient()' [options]="clients" [(ngModel)]="client.name" optionLabel="nome" placeholder="Selecione um cliente"></p-dropdown>
                   </div>
                 
 
@@ -97,14 +97,14 @@
                 </div>        
 
                 <div class="field">
-                    <label for="name">Name</label>
-                    <input type="text" pInputText id="name" [(ngModel)]="order.name" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !order.name}" />
-                    <small class="ng-dirty ng-invalid" *ngIf="submitted && !order.name">Nome é necessário</small>
+                    <label for="total">Total</label>
+                    <input type="text" pInputText id="total" [(ngModel)]="order.total" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !order.name}" />
+                    
                 </div>
 
                 <div class="field">
-                    <label for="price">Price</label>
-                    <input type="number" id="price" pInputTextarea [(ngModel)]="order.price" required rows="3" cols="20" min="0" step="0.01" />
+                    <label for="data">Data</label>
+                    <input type="date" id="data" pInputTextarea [(ngModel)]="order.data" required rows="3" cols="20" min="0" step="0.01" />
                 </div>
            
             </ng-template>
@@ -118,7 +118,7 @@
         <p-dialog [(visible)]="deleteOrderDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
             <div class="flex align-items-center justify-content-center">
                 <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                <span *ngIf="order">Tem certeza que quer deletar <b>{{order.name}}</b>?</span>
+                <span *ngIf="order">Tem certeza que quer deletar <b>{{order.code}}</b>?</span>
             </div>
             <ng-template pTemplate="footer">
                 <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteOrderDialog = false"></button>
