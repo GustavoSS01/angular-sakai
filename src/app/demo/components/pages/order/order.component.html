@@ -49,7 +49,7 @@
                         </td>
                         <td style="width:14%; min-width:10rem;">
                             <span class="p-column-title">Cliente</span>
-                            {{client.name}}
+                        
                         </td>
                         <td style="width:14%; min-width:8rem;">
                             <span class="p-column-title">Produto</span>
@@ -80,20 +80,26 @@
 
                 <div class="field">
                     <label for="clients">Clientes</label>
-                    <p-dropdown (onFocus)='getClient()' [options]="clients" [(ngModel)]="client.name" optionLabel="nome" placeholder="Selecione um cliente"></p-dropdown>
+                    <p-dropdown [options]="clients" [(ngModel)]="selectClient" optionLabel="nome" placeholder="Selecione um cliente"></p-dropdown>
                   </div>
                 
 
                 <div class="field">
                     <label for="produto">Produto</label>
-                    <p-dropdown [(ngModel)]="order.product" inputId="product" [options]="products" placeholder="Select a product" scrollHeight="200px" appendTo="body">
+                    <!-- <p-dropdown [(ngModel)]="selectProduct" inputId="product" optionLabel="name" [options]="products" placeholder="Select a product" scrollHeight="200px" appendTo="body">
                         <ng-template pTemplate="selectedItem">
                             <span *ngIf="order && order.product">{{ order.product }}</span>
                         </ng-template>
                         <ng-template let-option pTemplate="item">
                             <span>{{ option.label }}</span>
                         </ng-template>
-                    </p-dropdown>
+                    </p-dropdown> -->
+
+                    <p-multiSelect 
+                        [options]="products" 
+                        [(ngModel)]="selectProducts" 
+                        optionLabel="name" 
+                        placeholder="Selecione os produtos" />
                 </div>        
 
                 <div class="field">

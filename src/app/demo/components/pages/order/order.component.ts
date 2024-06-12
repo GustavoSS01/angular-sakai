@@ -32,6 +32,10 @@ export class OrderComponent implements OnInit {
 
     selectedOrders: Order[] = [];
 
+    selectClient: any; 
+
+    selectProducts: any[]; 
+
     submitted: boolean = false;
 
     cols: any[] = [];
@@ -45,11 +49,13 @@ export class OrderComponent implements OnInit {
     ngOnInit() {
 
         this.clientService.getClients().subscribe((clients: any)=>{
+            console.log("clientes ",clients)
             this.clients = clients
         })
 
         this.productService.getProducts().subscribe((products: any)=>{
             this.products = products
+            console.log("proudotos ",products)
         })
 
         this.orderService.getOrders().subscribe((orders: any)=>{
