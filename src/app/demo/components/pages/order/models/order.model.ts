@@ -8,5 +8,5 @@ export interface Order {
     client?: Client;
     product?: Product;
     total?: number;
-    date?: Date;
+    date?: string;
 }

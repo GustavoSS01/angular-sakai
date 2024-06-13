@@ -94,12 +94,14 @@
 
                 <div class="field">
                     <label for="cpf">CPF</label>
-                    <input type="text" pInputText id="cpf" [(ngModel)]="client.cpf" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.cpf}"/>
+                    <!-- <input type="text" pInputText id="cpf" [(ngModel)]="client.cpf" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.cpf}"/> -->
+                    <p-inputMask mask="999-999-999.99" [(ngModel)]="client.cpf" placeholder="999-999-999.99" />
                 </div>
 
                 <div class="field">
                     <label for="cep">Cep</label>
-                    <input type="text" pInputText id="cep" [(ngModel)]="client.cep" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.cep}" (blur)="getCep(client.cep)"/>
+                    <p-inputMask mask="99999-999" [(ngModel)]="client.cpf" placeholder="99999-999" />
+                    <!-- <input type="text" pInputText id="cep" [(ngModel)]="client.cep" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.cep}" (blur)="getCep(client.cep)"/> -->
                 </div>
 
                 <div class="field">
@@ -117,14 +119,15 @@
                     <input type="text" pInputText id="logradouro" [(ngModel)]="client.logradouro" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.logradouro}"/>
                 </div>
 
-                <div class="field">
+                <!-- <div class="field">
                     <label for="bairro">Bairro</label>
                     <input type="text" pInputText id="bairro" [(ngModel)]="client.bairro" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.bairro}"/>
-                </div>
+                </div> -->
 
                 <div class="field">
                     <label for="telefone">Telefone</label>
-                    <input type="text" pInputText id="telefone" [(ngModel)]="client.telefone" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.telefone}"/>
+                    <p-inputMask mask="(99)99999-9999" [(ngModel)]="client.telefone" placeholder="(99)99999-9999" />
+                    <!-- <input type="text" pInputText id="telefone" [(ngModel)]="client.telefone" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.telefone}"/> -->
                 </div>
 
             </ng-template>

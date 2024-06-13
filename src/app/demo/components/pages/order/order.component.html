@@ -86,31 +86,19 @@
 
                 <div class="field">
                     <label for="produto">Produto</label>
-                    <!-- <p-dropdown [(ngModel)]="selectProduct" inputId="product" optionLabel="name" [options]="products" placeholder="Select a product" scrollHeight="200px" appendTo="body">
-                        <ng-template pTemplate="selectedItem">
-                            <span *ngIf="order && order.product">{{ order.product }}</span>
-                        </ng-template>
-                        <ng-template let-option pTemplate="item">
-                            <span>{{ option.label }}</span>
-                        </ng-template>
-                    </p-dropdown> -->
-
-                    <p-multiSelect 
-                        [options]="products" 
-                        [(ngModel)]="selectProducts" 
-                        optionLabel="name" 
-                        placeholder="Selecione os produtos" />
-                </div>        
+                    <p-multiSelect [options]="products" [(ngModel)]="selectProducts" optionLabel="name" placeholder="Selecione os produtos" />
+                </div>
 
                 <div class="field">
                     <label for="total">Total</label>
-                    <input type="text" pInputText id="total" [(ngModel)]="order.total" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !order.name}" />
-                    
+                    <p-inputNumber [(ngModel)]="price" mode="currency" currency="BRL" locale="pt-BR" [minFractionDigits]="2">    
+                    </p-inputNumber>
                 </div>
 
                 <div class="field">
                     <label for="data">Data</label>
-                    <input type="date" id="data" pInputTextarea [(ngModel)]="order.data" required rows="3" cols="20" min="0" step="0.01" />
+                    <!-- <input type="date" id="data" pInputTextarea [(ngModel)]="order.data" required rows="3" cols="20" min="0" step="0.01" /> -->
+                    <p-inputMask [(ngModel)]="date" mask="99/99/9999" placeholder="99/99/9999" slotChar="mm/dd/yyyy" />
                 </div>
            
             </ng-template>

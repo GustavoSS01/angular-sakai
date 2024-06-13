@@ -17,6 +17,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
 import { MultiSelectModule } from 'primeng/multiselect';
+import {InputMaskModule} from 'primeng/inputmask';
 
 @NgModule({
     imports: [
@@ -36,7 +37,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
         RadioButtonModule,
         InputNumberModule,
         DialogModule,
-        MultiSelectModule
+        MultiSelectModule,
+        InputMaskModule
     ],
     declarations: [OrderComponent]
 })

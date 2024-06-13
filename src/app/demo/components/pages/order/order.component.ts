@@ -49,18 +49,15 @@ export class OrderComponent implements OnInit {
     ngOnInit() {
 
         this.clientService.getClients().subscribe((clients: any)=>{
-            console.log("clientes ",clients)
             this.clients = clients
         })
 
         this.productService.getProducts().subscribe((products: any)=>{
             this.products = products
-            console.log("proudotos ",products)
         })
 
         this.orderService.getOrders().subscribe((orders: any)=>{
             this.orders = orders
-            console.log(orders)
         });
 
         this.cols = [
@@ -122,7 +119,7 @@ export class OrderComponent implements OnInit {
     saveOrder() {
         this.submitted = true;
 
-        if (this.order.client.nome?.trim()) {
+        if (this.order.code?.trim()) {
             if (this.order.key) {
                 // this.orders[this.findIndexById(this.order.id)] = this.order;
                 this.orderService.updateOrder(this.order.key, this.order);
