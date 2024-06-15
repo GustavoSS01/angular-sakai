@@ -95,11 +95,11 @@
                 <div class="field">
                     <label for="cpf">CPF</label>
                     <!-- <input type="text" pInputText id="cpf" [(ngModel)]="client.cpf" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.cpf}"/> -->
-                    <p-inputMask mask="999-999-999.99" [(ngModel)]="client.cpf" placeholder="999-999-999.99" />
+                    <p-inputMask mask="999.999.999-99" [(ngModel)]="client.cpf" placeholder="999.999.999-99" />
                 </div>
 
                 <div class="field">
-                    <label for="cep">Cep</label>
+                    <label for="cep">CEP</label>
                     <!-- <p-inputMask mask="99999-999" [(ngModel)]="client.cep" placeholder="99999-999" (blur)="getCep(client.cep)" /> -->
                     <input type="text" pInputText id="cep" [(ngModel)]="client.cep" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.cep}" (blur)="getCep(client.cep)"/>
                 </div>
@@ -141,7 +141,7 @@
         <p-dialog [(visible)]="deleteClientDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
             <div class="flex align-items-center justify-content-center">
                 <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                <span *ngIf="client">Are you sure you want to delete <b>{{client.nome}}</b>?</span>
+                <span *ngIf="client">Você tem certeza que quer deletar <b>{{client.nome}}</b>?</span>
             </div>
             <ng-template pTemplate="footer">
                 <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteClientDialog = false"></button>
@@ -152,7 +152,7 @@
         <p-dialog [(visible)]="deleteClientsDialog" header="Confirm" [modal]="true" [style]="{width:'450px'}">
             <div class="flex align-items-center justify-content-center">
                 <i class="pi pi-exclamation-triangle mr-3" style="font-size: 2rem"></i>
-                <span>Are you sure you want to delete selected clients?</span>
+                <span>Você tem certeza que quer deletar os clientes selecionados?</span>
             </div>
             <ng-template pTemplate="footer">
                 <button pButton pRipple icon="pi pi-times" class="p-button-text" label="No" (click)="deleteClientsDialog = false"></button>
