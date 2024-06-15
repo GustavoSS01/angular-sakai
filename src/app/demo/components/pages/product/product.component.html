@@ -73,15 +73,14 @@
             <ng-template pTemplate="content">
                 <div class="field">
                     <label for="name">Name</label>
-                    <input type="text" pInputText id="name" [(ngModel)]="product.name" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.name}" />
+                    <input type="text" pInputText id="name" [(ngModel)]="product.name" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !product.name}"/>
                     <small class="ng-dirty ng-invalid" *ngIf="submitted && !product.name">Nome é necessário</small>
                 </div>
                 
                 <div class="field">
                     <label for="price">Price</label>
                     <!-- <input type="number" id="price" pInputTextarea [(ngModel)]="product.price" required rows="3" cols="20" min="0" step="0.01" /> -->
-                    <p-inputNumber [(ngModel)]="price" mode="currency" currency="BRL" locale="pt-BR" [minFractionDigits]="2">
-                    </p-inputNumber>
+                    <p-inputNumber [(ngModel)]="product.price" mode="currency" currency="BRL" locale="pt-BR" [minFractionDigits]="2"></p-inputNumber>
                 </div>
 
                 <div class="field">

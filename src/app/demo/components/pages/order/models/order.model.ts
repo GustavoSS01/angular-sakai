@@ -4,9 +4,10 @@ import { Client } from "../../client/models/client.model";
 export interface Order {
     id?: string;
     key?: string;
+    name?: string;
     code?: string;
     client?: Client;
-    product?: Product;
+    products?: Product[];
     total?: number;
     date?: string;
 }

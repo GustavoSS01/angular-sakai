@@ -49,19 +49,19 @@
                         </td>
                         <td style="width:14%; min-width:10rem;">
                             <span class="p-column-title">Cliente</span>
-                        
+                            {{order.client.nome}}
                         </td>
                         <td style="width:14%; min-width:8rem;">
                             <span class="p-column-title">Produto</span>
-                            {{product.price | currency:'USD'}}
+                            {{ getProductNames(order) }}
                         </td>
-                        <td style="width:14%; min-width:10rem;">
+                        <td style="width:14%; min-width:8rem;">
                             <span class="p-column-title">Total</span>
-                            {{order.total}}
+                            {{order.total | currency:'BRL'}}
                         </td>
                         <td style="width:14%; min-width:10rem;">
                             <span class="p-column-title">Data</span>
-                            {{order.data}}
+                            {{order.date}}
                         </td>
                         <td>
                             <div class="flex">
@@ -84,21 +84,25 @@
                   </div>
                 
 
-                <div class="field">
+                  <div class="field">
                     <label for="produto">Produto</label>
-                    <p-multiSelect [options]="products" [(ngModel)]="selectProducts" optionLabel="name" placeholder="Selecione os produtos" />
+                    <p-multiSelect 
+                        [options]="products" 
+                        [(ngModel)]="selectProducts" 
+                        optionLabel="name" 
+                        placeholder="Selecione os produtos" 
+                        id="produto"
+                    ></p-multiSelect>
                 </div>
 
                 <div class="field">
                     <label for="total">Total</label>
-                    <p-inputNumber [(ngModel)]="price" mode="currency" currency="BRL" locale="pt-BR" [minFractionDigits]="2">    
-                    </p-inputNumber>
+                    <p-inputNumber [(ngModel)]="order.total" mode="currency" currency="BRL" locale="pt-BR" [minFractionDigits]="2"></p-inputNumber>
                 </div>
 
                 <div class="field">
-                    <label for="data">Data</label>
-                    <!-- <input type="date" id="data" pInputTextarea [(ngModel)]="order.data" required rows="3" cols="20" min="0" step="0.01" /> -->
-                    <p-inputMask [(ngModel)]="date" mask="99/99/9999" placeholder="99/99/9999" slotChar="mm/dd/yyyy" />
+                    <span>Data</span>
+                    <p-inputMask mask="99/99/9999" [(ngModel)]="order.date" placeholder="99/99/9999" slotChar="dd/mm/yyyy"></p-inputMask>
                 </div>
            
             </ng-template>

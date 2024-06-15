@@ -24,17 +24,16 @@ export class OrderComponent implements OnInit {
 
     orders: Order[] = [];
 
-    order: Order = {};
+    order: Order = {};  // Aqui está correto
 
-    clients: Client = {};
-
-    products: Product = {};
+    clients: Client[] = [];  // Deve ser um array de Client
+    products: Product[] = [];  // Deve ser um array de Product
 
     selectedOrders: Order[] = [];
 
-    selectClient: any; 
+    selectClient: Client | undefined; 
 
-    selectProducts: any[]; 
+    selectProducts: Product[] = []; 
 
     submitted: boolean = false;
 
@@ -48,24 +47,24 @@ export class OrderComponent implements OnInit {
 
     ngOnInit() {
 
-        this.clientService.getClients().subscribe((clients: any)=>{
+        this.clientService.getClients().subscribe((clients: Client[])=>{
             this.clients = clients
         })
 
-        this.productService.getProducts().subscribe((products: any)=>{
+        this.productService.getProducts().subscribe((products: Product[])=>{
             this.products = products
         })
 
-        this.orderService.getOrders().subscribe((orders: any)=>{
+        this.orderService.getOrders().subscribe((orders: Order[])=>{
             this.orders = orders
         });
 
         this.cols = [
             { field: 'code', header: 'Code' },
-            { field: 'cliente', header: 'Cliente' },
-            { field: 'produto', header: 'Produto' },
+            { field: 'client', header: 'Cliente' },
+            { field: 'products', header: 'Produto' },
             { field: 'total', header: 'Total' },
-            { field: 'data', header: 'Data' },
+            { field: 'date', header: 'Data' },
         ];
     }
 
@@ -82,21 +81,24 @@ export class OrderComponent implements OnInit {
 
     editOrder(order: Order) {
         this.order = { ...order };
+        this.selectClient = order.client;
+        this.selectProducts = order.products;
         this.orderDialog = true;
     }
+    
 
     deleteOrder(order: Order) {
         this.deleteOrderDialog = true;
-        // this.order = { ...order };
+
         this.orderService.deleteOrder(order.key);
-        
+
         this.confirmDelete();
 
     }
 
     confirmDeleteSelected() {
         this.deleteOrdersDialog = false;
-        // this.orders = this.orders.filter(val => !this.selectedOrders.includes(val));
+
         this.selectedOrders.forEach(order => {
             this.orderService.deleteOrder(order.key);
         });
@@ -106,7 +108,7 @@ export class OrderComponent implements OnInit {
 
     confirmDelete() {
         this.deleteOrderDialog = false;
-        // this.orders = this.orders.filter(val => val.id !== this.order.id);
+
         this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Order Deleted', life: 3000 });
         this.order = {};
     }
@@ -116,25 +118,36 @@ export class OrderComponent implements OnInit {
         this.submitted = false;
     }
 
+    getProductNames(order: Order): string {
+        return order.products?.map(product => product.name).join(', ') || '';
+    }
+
     saveOrder() {
         this.submitted = true;
-
-        if (this.order.code?.trim()) {
+        if (this.selectClient) {
             if (this.order.key) {
-                // this.orders[this.findIndexById(this.order.id)] = this.order;
+                this.order.client = this.selectClient;
+                this.order.products = this.selectProducts;
                 this.orderService.updateOrder(this.order.key, this.order);
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Order Updated', life: 3000 });
             } else {
-                this.order.key = this.createId();
-                this.order.code = this.createId();
-                // this.orders.push(this.order);
-                this.orderService.addOrder(this.order);
+                const newOrder: Order = {
+                    key: this.createId(),
+                    code: this.createId(),
+                    client: this.selectClient,
+                    products: this.selectProducts,
+                    total: this.order.total,
+                    date: this.order.date
+                };
+                this.orderService.addOrder(newOrder);
                 this.messageService.add({ severity: 'success', summary: 'Successful', detail: 'Order Created', life: 3000 });
             }
 
             this.orders = [...this.orders];
             this.orderDialog = false;
             this.order = {};
+            this.selectProducts = [];
+            this.selectClient = undefined;
         }
     }
 

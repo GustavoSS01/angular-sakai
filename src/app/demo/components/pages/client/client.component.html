@@ -100,8 +100,8 @@
 
                 <div class="field">
                     <label for="cep">Cep</label>
-                    <p-inputMask mask="99999-999" [(ngModel)]="client.cpf" placeholder="99999-999" />
-                    <!-- <input type="text" pInputText id="cep" [(ngModel)]="client.cep" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.cep}" (blur)="getCep(client.cep)"/> -->
+                    <!-- <p-inputMask mask="99999-999" [(ngModel)]="client.cep" placeholder="99999-999" (blur)="getCep(client.cep)" /> -->
+                    <input type="text" pInputText id="cep" [(ngModel)]="client.cep" required autofocus [ngClass]="{'ng-invalid ng-dirty' : submitted && !client.cep}" (blur)="getCep(client.cep)"/>
                 </div>
 
                 <div class="field">

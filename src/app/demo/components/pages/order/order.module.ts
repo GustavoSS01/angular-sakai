@@ -18,6 +18,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
 import { DialogModule } from 'primeng/dialog';
 import { MultiSelectModule } from 'primeng/multiselect';
 import {InputMaskModule} from 'primeng/inputmask';
+import {CalendarModule} from 'primeng/calendar';
 
 @NgModule({
     imports: [
@@ -38,7 +39,8 @@ import {InputMaskModule} from 'primeng/inputmask';
         InputNumberModule,
         DialogModule,
         MultiSelectModule,
-        InputMaskModule
+        InputMaskModule,
+        CalendarModule
     ],
     declarations: [OrderComponent]
 })
