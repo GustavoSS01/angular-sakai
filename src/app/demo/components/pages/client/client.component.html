@@ -30,12 +30,12 @@
                         <th style="width: 3rem">
                             <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                         </th>
-                        <th pSortableColumn="code">Code <p-sortIcon field="code"></p-sortIcon></th>
+                        <th pSortableColumn="code">Código <p-sortIcon field="code"></p-sortIcon></th>
                         <th pSortableColumn="nome">Nome <p-sortIcon field="nome"></p-sortIcon></th>
                         <th pSortableColumn="cpf">CPF <p-sortIcon field="cpf"></p-sortIcon></th>
-                        <th pSortableColumn="cep">Cep <p-sortIcon field="cep"></p-sortIcon></th>
+                        <th pSortableColumn="cep">CEP <p-sortIcon field="cep"></p-sortIcon></th>
                         <th pSortableColumn="estados">Estado <p-sortIcon field="estados"></p-sortIcon></th>
-                        <th pSortableColumn="municipios">Municipio <p-sortIcon field="municipios"></p-sortIcon></th>
+                        <th pSortableColumn="municipios">Município <p-sortIcon field="municipios"></p-sortIcon></th>
                         <th pSortableColumn="logradouro">Logradouro <p-sortIcon field="logradouro"></p-sortIcon></th>
                         <th></th>
                     </tr>
@@ -45,7 +45,7 @@
                         <td>
                             <p-tableCheckbox [value]="client"></p-tableCheckbox>
                         </td>
-                        <td style="width:14%; min-width:10rem;"><span class="p-column-title">Code</span>
+                        <td style="width:14%; min-width:10rem;"><span class="p-column-title">Código</span>
                             {{client.code || client.id}}
                         </td>
                         <td style="width:14%; min-width:10rem;">
@@ -57,7 +57,7 @@
                             {{client.cpf}}
                         </td>
                         <td style="width:14%; min-width:10rem;">
-                            <span class="p-column-title">Cep</span>
+                            <span class="p-column-title">CEP</span>
                             {{client.cep}}
                         </td>
                         <td style="width:14%; min-width:10rem;">
@@ -65,7 +65,7 @@
                             {{client.estado.nome}}
                         </td>
                         <td style="width:14%; min-width:10rem;">
-                            <span class="p-column-title">Municipio</span>
+                            <span class="p-column-title">Município</span>
                             {{client.municipio.nome}}
                         </td>
                         <td style="width:14%; min-width:10rem;">
@@ -110,7 +110,7 @@
                 </div>
                 
                 <div class="field">
-                    <label for="municipios">Municipios</label>
+                    <label for="municipios">Municípios</label>
                     <p-dropdown (onChange)="testeUF()" [options]="municipios" [(ngModel)]="client.municipio" optionLabel="nome" placeholder="Selecione um municipio" />
                 </div>
                 
